@@ -14,6 +14,7 @@
     package="dev.spikeysanju.wiggles">
 
     <application
+        android:name=".DogAdoptApplication"
         android:allowBackup="true"
         android:icon="@drawable/wiggle_logo"
         android:roundIcon="@drawable/wiggle_logo"

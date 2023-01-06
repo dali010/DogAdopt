@@ -22,7 +22,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModelProvider
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import dev.spikeysanju.wiggles.component.ItemDogCard
 import dev.spikeysanju.wiggles.component.TopBar
@@ -33,12 +33,10 @@ fun HomeScreen(
     navController: NavHostController,
     dogList: List<Dog>,
     toggleTheme: () -> Unit,
-
+    viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
 
-//    val viewModel : HomeScreenViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
-   val  viewModel = ViewModelProvider(this, ViewModelFactory(repositoryObject)).get(HomeScreenViewModel::class.java)
-//    val state = viewModel.state
+    val state = viewModel.state
 
     LazyColumn {
         item {

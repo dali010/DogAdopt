@@ -21,7 +21,7 @@ class HomeScreenViewModel @Inject constructor(
     init {
         runBlocking {
             state.value = state.value.copy(
-//                dogs = repository.getDogs()
+                dogs = repository.getDogs()
             )
         }
     }
@@ -29,17 +29,6 @@ class HomeScreenViewModel @Inject constructor(
     fun onEvent(event: DogScreenEvent) {
         when (event) {
             is DogScreenEvent.GetDogs -> Unit
-        }
-    }
-}
-
-class ViewModelFactory constructor(private val repository:DogRepository): ViewModelProvider.Factory {
-
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return if (modelClass.isAssignableFrom(DogRepository::class.java)) {
-            HomeScreenViewModel(this.repository) as T
-        } else {
-            throw IllegalArgumentException("ViewModel Not Found")
         }
     }
 }
