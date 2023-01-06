@@ -18,3 +18,19 @@ fun Dog.toDogEntity(): DogEntity {
         adopted = adopted
     )
 }
+
+fun DogEntity.toDog(): Dog {
+    return Dog(
+        id = _id,
+        name = name,
+        age = age,
+        gender = gender,
+        color = color,
+        weight = weight,
+        location = location,
+        image = image,
+        about = about,
+        owner = owner,
+        adopted = adopted
+    )
+}

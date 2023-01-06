@@ -39,7 +39,7 @@ fun WigglesMain(toggleTheme: () -> Unit) {
 
             arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) {
-            Details(navController, it.arguments?.getInt("id") ?: 0)
+            DogDetailsScreen(navController, it.arguments?.getInt("id") ?: 0)
         }
     }
 }

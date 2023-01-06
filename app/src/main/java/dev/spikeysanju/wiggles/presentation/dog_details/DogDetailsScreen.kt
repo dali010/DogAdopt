@@ -23,9 +23,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,15 +34,29 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import dev.spikeysanju.wiggles.R
 import dev.spikeysanju.wiggles.component.DogInfoCard
 import dev.spikeysanju.wiggles.component.InfoCard
 import dev.spikeysanju.wiggles.component.OwnerCard
 import dev.spikeysanju.wiggles.data.FakeDogDatabase
+import dev.spikeysanju.wiggles.presentation.dog_details.DogDetailsScreenEvent
+import dev.spikeysanju.wiggles.presentation.dog_details.DogDetailsScreenState
+import dev.spikeysanju.wiggles.presentation.dog_details.DogDetailsScreenViewModel
 
 @Composable
-fun Details(navController: NavController, id: Int) {
+fun DogDetailsScreen(
+    navController: NavController,
+    id: Int,
+    viewModel: DogDetailsScreenViewModel = hiltViewModel()
+) {
+
+    val state = viewModel.state
+
+    LaunchedEffect(key1 = id) {
+        viewModel.onEvent(DogDetailsScreenEvent.GetDog(id))
+    }
 
     Scaffold(
         topBar = {
@@ -67,14 +79,16 @@ fun Details(navController: NavController, id: Int) {
             )
         },
 
+
+
         content = {
-            DetailsView(id)
+            DetailsView(state)
         }
     )
 }
 
 @Composable
-fun DetailsView(id: Int) {
+fun DetailsView(state: MutableState<DogDetailsScreenState>) {
     val colorr = remember {
         mutableStateOf(R.color.blue)
     }
@@ -86,11 +100,12 @@ fun DetailsView(id: Int) {
             .background(color = colorResource(id = R.color.background))
     ) {
 
-        val dog = FakeDogDatabase.dogList[id]
+
+        val dog = state.value.dog
 
         // Basic details
         item {
-            dog.apply {
+            dog?.apply {
 
                 val dogImage: Painter = painterResource(id = dog.image)
                 Image(
@@ -104,13 +119,17 @@ fun DetailsView(id: Int) {
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
-                DogInfoCard(name, gender, location)
+                DogInfoCard(
+                    name,
+                    gender,
+                    location
+                )
             }
         }
 
         // My story details
         item {
-            dog.apply {
+            dog?.apply {
                 Spacer(modifier = Modifier.height(24.dp))
                 Title(title = "My Story")
                 Spacer(modifier = Modifier.height(16.dp))
@@ -128,7 +147,7 @@ fun DetailsView(id: Int) {
 
         // Quick info
         item {
-            dog.apply {
+            dog?.apply {
 
                 Spacer(modifier = Modifier.height(24.dp))
                 Title(title = "Dog info")
@@ -141,14 +160,14 @@ fun DetailsView(id: Int) {
                 ) {
                     InfoCard(title = "Age", value = dog.age.toString().plus(" yrs"))
                     InfoCard(title = "Color", value = color)
-                    InfoCard(title = "Weight", value = weight.toString().plus("Kg"))
+                    InfoCard(title = "Weight", value = weight.toString().plus("Kg")  )
                 }
             }
         }
 
         // Owner info
         item {
-            dog.apply {
+            dog?.apply {
 
                 Spacer(modifier = Modifier.height(24.dp))
                 Title(title = "Owner info")
@@ -164,8 +183,8 @@ fun DetailsView(id: Int) {
             Spacer(modifier = Modifier.height(36.dp))
             Button(
                 onClick = {
-                    dog.adopted = !dog.adopted
-                    colorr.value = if (dog.adopted) R.color.red else  R.color.blue
+//                    dog?.adopted = !dog..adopted
+//                    colorr.value = if (dog.adopted) R.color.red else  R.color.blue
                 },
                 modifier = Modifier
                     .fillMaxWidth()

@@ -47,8 +47,8 @@ fun HomeScreen(
             )
             Spacer(modifier = Modifier.height(8.dp))
         }
-        items(dogList) {
-            dogList.forEach {
+        items(state.value.dogs?.size ?: 0) {
+            state.value.dogs?.forEach {
                 ItemDogCard(
                     it,
                     onItemClicked = { dog ->

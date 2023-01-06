@@ -12,7 +12,7 @@ interface DogDao {
     suspend fun getDogs(): List<DogEntity>
 
     @Query("SELECT * FROM `dog_table` where _id = :dogId")
-    suspend fun getDog(dogId: String): DogEntity?
+    suspend fun getDog(dogId: Int): DogEntity?
 
     @Update
     suspend fun updateDog(dog: DogEntity)

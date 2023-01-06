@@ -1,10 +1,8 @@
 package dev.spikeysanju.wiggles.presentation.home
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.spikeysanju.wiggles.domain.DogRepository
 import kotlinx.coroutines.runBlocking
@@ -26,9 +24,9 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    fun onEvent(event: DogScreenEvent) {
+    fun onEvent(event: HomeScreenEvent) {
         when (event) {
-            is DogScreenEvent.GetDogs -> Unit
+            is HomeScreenEvent.GetDogs -> Unit
         }
     }
 }
