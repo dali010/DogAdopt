@@ -20,7 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import dev.spikeysanju.wiggles.R
+import dev.spikeysanju.wiggles.component.CustomDialog
 import dev.spikeysanju.wiggles.component.CustomTextField
+import dev.spikeysanju.wiggles.component.DialogType
 import dev.spikeysanju.wiggles.navigation.Screen
 import dev.spikeysanju.wiggles.ui.theme.DarkGreen
 import dev.spikeysanju.wiggles.ui.theme.LightGreen
@@ -40,7 +42,7 @@ fun LoginScreen(
     LaunchedEffect(key1 = state) {
         if (state.loginSucceed) {
             delay(50L)
-            navController.navigate(Screen.Login.route)
+            navController.navigate(Screen.Home.route)
         }
     }
 
@@ -106,7 +108,18 @@ fun LoginScreen(
                 )
             )
         }
+        if (state.dialogStatus) {
+            CustomDialog(
+                description = "Verify your credentials please",
+                dialogType = DialogType.ErrorDialog.type
+            ) {
+                viewModel.onEvent(LoginEvent.ManageSuccessDialog(false))
+            }
+        }
+
     }
+
+
 
 }
 

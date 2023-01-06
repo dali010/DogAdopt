@@ -4,9 +4,8 @@ sealed class LoginEvent {
     data class EnteredEmail(val email: String) : LoginEvent()
     data class EnteredPassword(val password: String) : LoginEvent()
     object Login : LoginEvent()
-    object DismissDialog : LoginEvent()
     object TogglePasswordVisibility : LoginEvent()
-    object DismissNetworkNotAvailableDialog : LoginEvent()
+    data class ManageSuccessDialog(val dialogStatus: Boolean): LoginEvent()
 
 }
 

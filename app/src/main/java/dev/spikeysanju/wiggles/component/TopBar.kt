@@ -45,7 +45,7 @@ fun TopBar(onToggle: () -> Unit) {
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "Hey Spikey,",
+                text = "Hey Siwar",
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.h5,
                 color = MaterialTheme.colors.surface

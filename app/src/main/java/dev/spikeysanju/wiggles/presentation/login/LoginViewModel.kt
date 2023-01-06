@@ -40,6 +40,21 @@ class LoginViewModel @Inject constructor(
             }
 
             is LoginEvent.Login -> {
+                if (emailState.value.text == "siwar@gmail.com" && passwordState.value.text == "123456789"){
+                    _loginState.value = loginState.value.copy(
+                        loginSucceed = true
+                    )
+                }else
+                    _loginState.value = loginState.value.copy(
+                        dialogStatus = true
+                )
+
+            }
+
+            is LoginEvent.ManageSuccessDialog -> {
+                    _loginState.value = loginState.value.copy(
+                        dialogStatus = event.dialogStatus
+                    )
 
             }
 
