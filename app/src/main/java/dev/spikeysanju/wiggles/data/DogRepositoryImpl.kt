@@ -13,4 +13,5 @@ class DogRepositoryImpl @Inject constructor(
 ) : DogRepository {
     override suspend fun getDogs() = dogsLocalSource.getDogs().map { it.toDog() }
     override suspend fun getDog(dogId: Int): Dog = dogsLocalSource.getDog(dogId)?.toDog()!!
+    override suspend fun updateDogAdopted(dogId: Int, adopted: Boolean) = dogsLocalSource.updateDogAdopted(dogId, adopted)
 }

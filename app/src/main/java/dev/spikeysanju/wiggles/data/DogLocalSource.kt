@@ -7,4 +7,5 @@ class DogLocalSource @Inject constructor(
 ) {
     suspend fun getDogs() = dogDao.getDogs()
     suspend fun getDog(dogId: Int) = dogDao.getDog(dogId)
+    suspend fun updateDogAdopted(dogId: Int,adopted: Boolean) = dogDao.updateDogAdopted(dogId, adopted)
 }

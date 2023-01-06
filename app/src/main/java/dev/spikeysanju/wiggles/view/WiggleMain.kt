@@ -25,12 +25,16 @@ import androidx.navigation.navArgument
 import dev.spikeysanju.wiggles.data.FakeDogDatabase
 import dev.spikeysanju.wiggles.navigation.Screen
 import dev.spikeysanju.wiggles.presentation.home.HomeScreen
+import dev.spikeysanju.wiggles.presentation.login.LoginScreen
 
 @ExperimentalAnimationApi
 @Composable
 fun WigglesMain(toggleTheme: () -> Unit) {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = Screen.Home.route) {
+    NavHost(navController, startDestination = Screen.Login.route) {
+        composable(Screen.Login.route) {
+            LoginScreen(navController)
+        }
         composable(Screen.Home.route) {
             HomeScreen(navController, FakeDogDatabase.dogList, toggleTheme)
         }

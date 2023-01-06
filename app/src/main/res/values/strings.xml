@@ -9,7 +9,11 @@
       or implied. See the License for the specific language governing permissions and limitations under
       the License.
       -->
-    <string name="app_name">Wiggles</string>
+    <string name="app_name">DogAdopt</string>
+    <string name="text_login">Login</string>
     <string name="text_home">Home</string>
     <string name="text_details">Details</string>
+    <string name="password_hint">Password</string>
+    <string name="login_hint">Email</string>
+
 </resources>

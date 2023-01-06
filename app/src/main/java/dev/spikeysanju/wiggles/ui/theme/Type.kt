@@ -16,6 +16,7 @@
 package dev.spikeysanju.wiggles.ui.theme
 
 import androidx.compose.material.Typography
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -31,6 +32,18 @@ private val Sailec = FontFamily(
 
 // Set of Material typography styles to start with
 val typography = Typography(
+    h1 = TextStyle(
+        fontFamily = Sailec,
+        fontWeight = FontWeight.Bold,
+        fontSize = 30.sp,
+        color = White
+    ),
+    h2 = TextStyle(
+        fontFamily = Sailec,
+        fontWeight = FontWeight.Medium,
+        fontSize = 24.sp,
+        color = White
+    ),
     h4 = TextStyle(
         fontFamily = Sailec,
         fontWeight = FontWeight.W600,

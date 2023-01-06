@@ -31,15 +31,15 @@ import androidx.compose.ui.unit.dp
 import dev.spikeysanju.wiggles.R
 
 @Composable
-fun GenderTag(name: String) {
+fun GenderTag(name: String, modifier: Modifier = Modifier) {
     val color = if (name == "Male") R.color.blue else R.color.red
-    ChipView(gender = name, colorResource = colorResource(id = color))
+    ChipView(gender = name, colorResource = colorResource(id = color), modifier)
 }
 
 @Composable
-fun ChipView(gender: String, colorResource: Color) {
+fun ChipView(gender: String, colorResource: Color, modifier: Modifier) {
     Box(
-        modifier = Modifier
+        modifier
             .wrapContentWidth()
             .clip(RoundedCornerShape(12.dp))
             .background(colorResource.copy(.08f))
@@ -48,6 +48,27 @@ fun ChipView(gender: String, colorResource: Color) {
             text = gender, modifier = Modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
             style = MaterialTheme.typography.caption,
             color = colorResource
+        )
+    }
+}
+
+@Composable
+fun AdoptedTag(name: String, modifier: Modifier = Modifier) {
+    AdoptedView(gender = name, Color(0xFF57cc99),  modifier )
+}
+
+@Composable
+fun AdoptedView(gender: String,color: Color, modifier: Modifier) {
+    Box(
+        modifier
+            .wrapContentWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(color.copy(.08f))
+    ) {
+        Text(
+            text = gender, modifier = Modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
+            style = MaterialTheme.typography.caption,
+            color = color
         )
     }
 }

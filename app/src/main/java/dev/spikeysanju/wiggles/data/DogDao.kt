@@ -18,6 +18,6 @@ interface DogDao {
     suspend fun updateDog(dog: DogEntity)
 
     @Query("UPDATE `dog_table` SET adopted=:adopted  WHERE _id LIKE :dogId")
-    suspend fun updateDogAdopted(dogId: String,adopted: Boolean)
+    suspend fun updateDogAdopted(dogId: Int,adopted: Boolean)
 
 }

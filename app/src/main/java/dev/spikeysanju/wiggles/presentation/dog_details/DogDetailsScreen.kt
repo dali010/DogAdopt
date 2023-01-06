@@ -15,6 +15,7 @@
  */
 package dev.spikeysanju.wiggles.view
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -40,7 +41,6 @@ import dev.spikeysanju.wiggles.R
 import dev.spikeysanju.wiggles.component.DogInfoCard
 import dev.spikeysanju.wiggles.component.InfoCard
 import dev.spikeysanju.wiggles.component.OwnerCard
-import dev.spikeysanju.wiggles.data.FakeDogDatabase
 import dev.spikeysanju.wiggles.presentation.dog_details.DogDetailsScreenEvent
 import dev.spikeysanju.wiggles.presentation.dog_details.DogDetailsScreenState
 import dev.spikeysanju.wiggles.presentation.dog_details.DogDetailsScreenViewModel
@@ -80,19 +80,19 @@ fun DogDetailsScreen(
         },
 
 
-
         content = {
-            DetailsView(state)
+            DetailsView(state){ dogId ->
+                viewModel.onEvent(DogDetailsScreenEvent.OnAdoptClick(dogId))
+            }
         }
     )
 }
 
 @Composable
-fun DetailsView(state: MutableState<DogDetailsScreenState>) {
-    val colorr = remember {
-        mutableStateOf(R.color.blue)
-    }
-
+fun DetailsView(
+    state: MutableState<DogDetailsScreenState>,
+    onAdoptClick: (Int) -> Unit
+) {
 
     LazyColumn(
         modifier = Modifier
@@ -160,7 +160,7 @@ fun DetailsView(state: MutableState<DogDetailsScreenState>) {
                 ) {
                     InfoCard(title = "Age", value = dog.age.toString().plus(" yrs"))
                     InfoCard(title = "Color", value = color)
-                    InfoCard(title = "Weight", value = weight.toString().plus("Kg")  )
+                    InfoCard(title = "Weight", value = weight.toString().plus("Kg"))
                 }
             }
         }
@@ -183,15 +183,14 @@ fun DetailsView(state: MutableState<DogDetailsScreenState>) {
             Spacer(modifier = Modifier.height(36.dp))
             Button(
                 onClick = {
-//                    dog?.adopted = !dog..adopted
-//                    colorr.value = if (dog.adopted) R.color.red else  R.color.blue
+                    onAdoptClick(dog?.id ?: 0)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp)
                     .padding(16.dp, 0.dp, 16.dp, 0.dp),
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = colorResource(colorr.value),
+                    backgroundColor = if (state.value.dog?.adopted == true) Color(0xFF57cc99) else Color.Blue,
                     contentColor = Color.White
                 )
             ) {
